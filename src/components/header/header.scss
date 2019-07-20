@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+.header {
+    height: 60px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, .95);
+    z-index: 100;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+
+    .grid {
+        width: 1190px;
+        margin: auto;
+
+        &:after,
+        &:before {
+            content: " ";
+            display: table;
+        }
+
+        &:after {
+            clear: both;
+        }
+
+        .logo {
+            height: 100%;
+            float: left;
+            padding: 12px 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .toggle {
+            display: none;
+            float: right;
+            padding: 5px 12px;
+            margin: 15px 0 0;
+            color: #6190e8;
+            text-align: center;
+        }
+
+        .main {
+            .inner {
+                .nav {
+                    float: left;
+                    padding-left: 50px;
+
+                    li {
+                        position: relative;
+                        float: left;
+                        height: 100%;
+                        margin: 0 10px;
+                        line-height: 60px;
+
+                        a {
+                            padding: 0 15px;
+                            height: 100%;
+                            display: block;
+                            -webkit-transition: color .2s;
+                            -moz-transition: color .2s;
+                            -o-transition: color .2s;
+                            -ms-transition: color .2s;
+                            transition: color .2s;
+
+                            &.active:after {
+                                content: ' ';
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                height: 3px;
+                                width: 100%;
+                                background-color: #6190e8;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
