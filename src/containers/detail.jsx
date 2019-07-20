@@ -10,7 +10,8 @@ class Detail extends React.Component {
         super(props)
         this.state = {
             title: '',
-            content: ''
+            content: '',
+            loading: true
         }
     }
     componentDidMount() {
@@ -32,13 +33,14 @@ class Detail extends React.Component {
         getArticleDetail(this.props.match.params.id).then(data => {
             this.setState({
                 title: data.title,
-                content: marked(data.content)
+                content: marked(data.content),
+                loading: false
             })
         })
     }
     render() {
         return (
-            <DetailComponent title={this.state.title} content={this.state.content} />
+            <DetailComponent title={this.state.title} content={this.state.content} loading={this.state.loading} />
         )
     }
 }

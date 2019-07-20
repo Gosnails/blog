@@ -1,7 +1,9 @@
 import React from 'react';
+import LoadingComponent from '@/components/loading/loading.jsx';
 import './home.scss';
 
 const getList = props => {
+    console.log(props)
     return props.data.map(item => {
         return (
             <div className="el-col el-col-24 el-col-xs-12 el-col-sm-8 el-col-md-6" key={item._id}>
@@ -18,7 +20,7 @@ const HomeComponent = props => (
     <div className="content">
         <div className="grid">
             <div className="el-row">
-                {getList(props)}
+                {props.loading ? <LoadingComponent /> : getList(props)}
             </div>
         </div>
     </div>

@@ -6,13 +6,14 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: []
+            data: [],
+            loading: true
         }
         this.handleHistoryPush = this.handleHistoryPush.bind(this);
     }
     componentDidMount() {
         getArticleList().then(res => {
-            this.setState({ data: res })
+            this.setState({ data: res, loading: false })
         })
     }
     handleHistoryPush(id) {
@@ -20,10 +21,12 @@ class Home extends React.Component {
         this.props.history.push(`/article/${id}`);
     }
     render() {
+        console.log(this.state.loading)
         return (
             <HomeComponent
                 onHistoryPush={this.handleHistoryPush}
                 data={this.state.data}
+                loading={this.state.loading}
             />
         )
     }
