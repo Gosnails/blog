@@ -29,7 +29,14 @@ const HaderComponent = porps => (
                             </li>
                         </ul>
                     </div>
-                    <div className="serach"></div>
+                    <div className="search active">
+                        <span className="search-ico">
+                            <i className="iconfont icon-sousuo"></i>
+                        </span>
+                        <div className="search-form show">
+                            <input className="search-ipt" value={porps.value} onChange={porps.onChange} type="text"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
