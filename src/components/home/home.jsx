@@ -1,6 +1,7 @@
 import React from 'react';
 import LoadingComponent from '@/components/loading/loading.jsx';
 import './home.scss';
+import classNames from 'classnames';
 
 const getList = props => {
     return props.data.map(item => {
@@ -18,7 +19,7 @@ const getList = props => {
 const getCates = props => {
     return props.cates.map(item => {
         return (
-            <li className={props.type === item.value ? 'cate-menu-item active' : 'cate-menu-item'} key={item.label}
+            <li className={classNames('cate-menu-item', { active: props.type === item.value })} key={item.label}
                 onClick={() => props.onCates(item.value)}>
                 {item.label}
             </li>

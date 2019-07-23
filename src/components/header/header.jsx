@@ -10,7 +10,7 @@ const oddEvent = (match, location) => {
     return match.isExact;
 }
 
-const HaderComponent = porps => (
+const HaderComponent = props => (
     <div className="header">
         <div className="grid">
             <div className="logo"></div>
@@ -30,11 +30,11 @@ const HaderComponent = porps => (
                         </ul>
                     </div>
                     <div className="search active">
-                        <span className="search-ico">
+                        <span className="search-ico" onClick={props.onSearch}>
                             <i className="iconfont icon-sousuo"></i>
                         </span>
                         <div className="search-form show">
-                            <input className="search-ipt" value={porps.value} onChange={porps.onChange} type="text"/>
+                            <input className="search-ipt" value={props.value} onChange={props.onChange} type="text" />
                         </div>
                     </div>
                 </div>
