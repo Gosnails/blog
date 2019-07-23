@@ -2,15 +2,9 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoadingComponent from '@/components/loading/loading.jsx';
+import Header from './header';
+import Home from './home';
 
-const Header = Loadable({
-    loader: () => import('./header'),
-    loading: LoadingComponent
-});
-const Home = Loadable({
-    loader: () => import('./home'),
-    loading: LoadingComponent
-});
 const About = Loadable({
     loader: () => import('./about'),
     loading: LoadingComponent
