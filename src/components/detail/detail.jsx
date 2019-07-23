@@ -6,7 +6,7 @@ const HomeComponent = props => (
     <div className="content detail">
         {props.loading ? <LoadingComponent /> : (<div className="grid">
             <h2 className="title">{props.title}</h2>
-            <div className="detail" dangerouslySetInnerHTML={{ __html: props.content }}></div>
+            <div className="detail-html" dangerouslySetInnerHTML={{ __html: props.content }}></div>
         </div>)}
     </div>
 )

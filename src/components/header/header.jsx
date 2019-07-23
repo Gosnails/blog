@@ -24,9 +24,9 @@ const HaderComponent = props => (
                             <li className="item">
                                 <NavLink to="/" isActive={oddEvent}>首页</NavLink>
                             </li>
-                            <li className="item">
+                            {/* <li className="item">
                                 <NavLink to="/about" isActive={oddEvent}>关于我们</NavLink>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="search active">

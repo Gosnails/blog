@@ -3,7 +3,7 @@ import DetailComponent from '@/components/detail/detail.jsx';
 import { getArticleDetail } from '@/api/article.js';
 import marked from 'marked'
 import hljs from "highlight.js";
-import 'highlight.js/styles/monokai-sublime.css';
+import 'highlight.js/styles/tomorrow.css';
 
 class Detail extends React.Component {
     constructor(props) {
