@@ -1,6 +1,7 @@
 import React from 'react';
 import DetailComponent from '@/components/detail/detail.jsx';
 import { getArticleDetail } from '@/api/article.js';
+import { parseTime } from '@/utils';
 import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/tomorrow.css';
@@ -11,6 +12,7 @@ class Detail extends React.Component {
         this.state = {
             title: '',
             content: '',
+            time: '',
             loading: true
         }
     }
@@ -34,13 +36,18 @@ class Detail extends React.Component {
             this.setState({
                 title: data.title,
                 content: marked(data.content),
-                loading: false
+                loading: false,
+                time: this._handleFormTime(data.createdAt)
             })
         })
     }
+    _handleFormTime(time) {
+        let timeStamp = new Date(time).getTime()
+        return parseTime(timeStamp);
+    }
     render() {
         return (
-            <DetailComponent title={this.state.title} content={this.state.content} loading={this.state.loading} />
+            <DetailComponent time={this.state.time} title={this.state.title} content={this.state.content} loading={this.state.loading} />
         )
     }
 }

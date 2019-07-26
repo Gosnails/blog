@@ -30,11 +30,11 @@ const HaderComponent = props => (
                         </ul>
                     </div>
                     <div className="search active">
-                        <span className="search-ico" onClick={props.onSearch}>
+                        <span className="search-ico">
                             <i className="iconfont icon-sousuo"></i>
                         </span>
                         <div className="search-form show">
-                            <input className="search-ipt" value={props.value} onChange={props.onChange} type="text" />
+                            <input className="search-ipt" onKeyDown={props.onSearch} value={props.value} onChange={props.onChange} type="text" />
                         </div>
                     </div>
                 </div>

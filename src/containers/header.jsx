@@ -18,13 +18,15 @@ class Header extends React.Component {
         this.setState({ value: event.target.value });
         this.props.onArticleKeywords(event.target.value);
     }
-    handleSearch() {
-        this.props.history.push(`/`);
-        this.props.onArticleLoading(true)
-        getArticleList({ type: this.props.type, page: this.props.pageNum, q: this.props.keywords }).then(res => {
-            this.props.onArticleLoading(false);
-            this.props.onArticleList(res);
-        })
+    handleSearch(e) {
+        if (e.keyCode === 13) {
+            this.props.history.push(`/`);
+            this.props.onArticleLoading(true)
+            getArticleList({ type: this.props.type, page: this.props.pageNum, q: this.props.keywords }).then(res => {
+                this.props.onArticleLoading(false);
+                this.props.onArticleList(res);
+            })
+        }
     }
     render() {
         return (
