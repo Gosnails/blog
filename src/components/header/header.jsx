@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import classNames from 'classnames';
 import './header.scss';
 
 
@@ -14,10 +15,10 @@ const HaderComponent = props => (
     <div className="header">
         <div className="grid">
             <div className="logo"></div>
-            <span className="toggle">
+            <span className="toggle" onClick={props.onToggle}>
                 <i className="iconfont icon-ego-menu"></i>
             </span>
-            <div className="main">
+            <div className={classNames("main", { expand: props.expand })}>
                 <div className="inner">
                     <div className="nav">
                         <ul className="list">

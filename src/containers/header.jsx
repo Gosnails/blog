@@ -9,10 +9,12 @@ class Header extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: ''
+            value: '',
+            expand: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
     }
     handleChange(event) {
         this.setState({ value: event.target.value });
@@ -28,11 +30,20 @@ class Header extends React.Component {
             })
         }
     }
+    handleToggle() {
+        if (this.state.expand) {
+            this.setState({ expand: false });
+            return;
+        }
+        this.setState({ expand: true });
+    }
     render() {
         return (
             <HeaderComponent
+                onToggle={this.handleToggle}
                 onSearch={this.handleSearch}
                 onChange={this.handleChange}
+                expand={this.state.expand}
                 value={this.state.value}
             />
         )
