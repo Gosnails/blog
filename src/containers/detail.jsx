@@ -12,6 +12,7 @@ class Detail extends React.Component {
         this.state = {
             title: '',
             content: '',
+            cover: '',
             time: '',
             loading: true
         }
@@ -37,6 +38,7 @@ class Detail extends React.Component {
                 title: data.title,
                 content: marked(data.content),
                 loading: false,
+                cover: data.cover,
                 time: this._handleFormTime(data.createdAt)
             })
         })
@@ -47,7 +49,7 @@ class Detail extends React.Component {
     }
     render() {
         return (
-            <DetailComponent time={this.state.time} title={this.state.title} content={this.state.content} loading={this.state.loading} />
+            <DetailComponent cover={this.state.cover} time={this.state.time} title={this.state.title} content={this.state.content} loading={this.state.loading} />
         )
     }
 }

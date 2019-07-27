@@ -1,14 +1,15 @@
 import React from 'react';
 import LoadingComponent from '@/components/loading/loading.jsx';
-import './home.scss';
+import { BASE_IMG_URL } from '@/utils/config.js'
 import classNames from 'classnames';
+import './home.scss';
 
 const getList = props => {
     return props.data.map(item => {
         return (
             <div className="el-col el-col-24 el-col-xs-12 el-col-sm-8 el-col-md-6" key={item._id}>
                 <div className="card__box" onClick={() => props.onHistoryPush(item._id)}>
-                    <div className="cover" style={{ background: `url('https://qiniu.qihuanrobot.com/${item.cover}') rgb(204, 204, 204)` }}></div>
+                    <div className="cover" style={{ background: `url('${BASE_IMG_URL}${item.cover}') rgb(204, 204, 204)` }}></div>
                     <div className="title">{item.title}</div>
                 </div>
             </div>

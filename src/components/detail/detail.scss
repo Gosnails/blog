@@ -9,18 +9,30 @@
         line-height: 60px;
         border-bottom: 1px solid #eee;
     }
+
     .time {
         margin-bottom: 30px;
     }
 
+    .cover {
+        display: flex;
+        align-items: center;
+        max-height: 400px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+        }
+    }
+
+
     pre {
         background-color: #f8f8f8;
         padding: 1em;
-        margin: 2em 2em;
         font-family: Menlo, Monaco, Consolas, Courier New, monospace;
         -moz-border-radius: 1em;
         -webkit-border-radius: 1em;
-        border-radius: 1em;
+        border-radius: .3em;
         border-width: 0.3em;
         border-color: #f8f8f8;
         border-style: solid;
