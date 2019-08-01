@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import classNames from 'classnames';
 import './header.scss';
+import Logo from './logo.png'
 
 
 const oddEvent = (match, location) => {
@@ -14,7 +15,11 @@ const oddEvent = (match, location) => {
 const HaderComponent = props => (
     <div className="header">
         <div className="grid">
-            <div className="logo"></div>
+            <div className="logo">
+                <Link to="/">
+                    <img src={Logo} alt="faustun"/>
+                </Link>
+            </div>
             <span className="toggle" onClick={props.onToggle}>
                 <i className="iconfont icon-ego-menu"></i>
             </span>
