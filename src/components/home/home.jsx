@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoadingComponent from '@/components/loading/loading.jsx';
 import { BASE_IMG_URL } from '@/utils/config.js'
 import classNames from 'classnames';
 import styles from './home.module.css';
-console.log(styles)
+
 const getList = props => {
     return props.data.map(item => {
         return (
@@ -44,5 +45,14 @@ const HomeComponent = props => (
         </div>
     </div>
 )
+
+HomeComponent.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+    cates: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
+    onHistoryPush: PropTypes.func,
+    onCates: PropTypes.func
+}
 
 export default HomeComponent;

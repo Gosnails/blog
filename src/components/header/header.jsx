@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink, Link } from "react-router-dom";
 import classNames from 'classnames';
 import styles from './header.module.css';
-import Logo from './logo.png'
+// import Logo from './logo.png'
 
 
 const oddEvent = (match, location) => {
@@ -15,11 +16,11 @@ const oddEvent = (match, location) => {
 const HaderComponent = props => (
     <div className={styles.header}>
         <div className={styles.grid}>
-            {/* <div className={styles.logo}>
+            <div className={styles.logo}>
                 <Link to="/">
-                    <img src={Logo} alt="faustun" />
+                    {/* <img src={Logo} alt="faustun" /> */}
                 </Link>
-            </div> */}
+            </div>
             <span className={styles.toggle} onClick={props.onToggle}>
                 <i className="iconfont icon-ego-menu"></i>
             </span>
@@ -45,5 +46,13 @@ const HaderComponent = props => (
         </div>
     </div>
 )
+
+HaderComponent.propTypes = {
+    onToggle: PropTypes.func,
+    onSearch: PropTypes.func,
+    onChange: PropTypes.func,
+    expand: PropTypes.bool.isRequired,
+    value: PropTypes.string.isRequired
+}
 
 export default HaderComponent;

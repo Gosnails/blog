@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import HeaderComponent from '@/components/header/header.jsx';
@@ -50,6 +51,18 @@ class Header extends React.Component {
     }
 }
 
+Header.propTypes = {
+    articleList: PropTypes.array.isRequired,
+    keywords: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    pageNum: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
+    onArticleList: PropTypes.func,
+    onArticleKeywords: PropTypes.func,
+    onArticlePageNum: PropTypes.func,
+    onArticleLoading: PropTypes.func
+}
+
 const mapStateToProps = state => ({
     articleList: state.article.articleList,
     keywords: state.article.keywords,
@@ -62,8 +75,7 @@ const mapDispatchToProps = dispatch => ({
     onArticleList: (list) => dispatch(setArticleList(list)),
     onArticleKeywords: (keywords) => dispatch(setArticleKeywords(keywords)),
     onArticlePageNum: (num) => dispatch(setArticlePageNum(num)),
-    onArticleLoading: (bool) => dispatch(setArticleLoading(bool)),
-
+    onArticleLoading: (bool) => dispatch(setArticleLoading(bool))
 });
 const HeaderConnect = connect(
     mapStateToProps,

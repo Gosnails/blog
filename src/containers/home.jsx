@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HomeComponent from '@/components/home/home.jsx';
 import { getArticleList } from '@/api/article.js';
@@ -57,6 +58,18 @@ class Home extends React.Component {
             />
         )
     }
+}
+
+Home.propTypes = {
+    articleList: PropTypes.array.isRequired,
+    keywords: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    pageNum: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
+    onArticleList: PropTypes.func,
+    onArticleCates: PropTypes.func,
+    onArticlePageNum: PropTypes.func,
+    onArticleLoading: PropTypes.func
 }
 
 const mapStateToProps = state => ({
