@@ -2,6 +2,7 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoadingComponent from '@/components/loading/loading.jsx';
+import BackTop from '@/components/back-top/back-top.jsx';
 import Header from './header';
 import Home from './home';
 
@@ -18,6 +19,7 @@ class APP extends React.Component {
     render() {
         return (
             <Router>
+                <BackTop />
                 <Header />
                 <Route exact path="/" component={Home} />
                 <Route path="/article/:id" component={Detail} />
