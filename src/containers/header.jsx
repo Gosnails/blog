@@ -27,7 +27,7 @@ class Header extends React.Component {
             this.props.onArticleLoading(true)
             getArticleList({ type: this.props.type, page: this.props.pageNum, q: this.props.keywords }).then(res => {
                 this.props.onArticleLoading(false);
-                this.props.onArticleList(res);
+                this.props.onArticleList(res.data);
             })
         }
     }
