@@ -12,6 +12,11 @@ const getList = props => {
                 <div className={styles.card} onClick={() => props.onHistoryPush(item._id)}>
                     <div className={styles.cover} style={{ background: `url('${BASE_IMG_URL}${item.cover}') rgb(204, 204, 204)` }}></div>
                     <div className={styles.title}>{item.title}</div>
+                    <div className={styles.foot}>
+                        <span>{item.createdAt}</span>
+                        <span className={styles.division}>/</span>
+                        <span>{item.type}</span>
+                    </div>
                 </div>
             </div>
         )

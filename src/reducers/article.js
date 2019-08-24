@@ -1,3 +1,7 @@
+
+import { parseTime } from '@/utils';
+import { CATES } from '@/utils/config';
+
 const ARTICLE_LIST = 'blog/article/ARTICLE_LIST';
 const ARTICLE_TYPE = 'blog/article/ARTICLE_TYPE';
 const ARTICLE_KEYWORDS = 'blog/article/ARTICLE_KEYWORDS';
@@ -12,12 +16,30 @@ const initArticleState = {
     loading: true
 };
 
+
+const handleFormTime = time => {
+    let timeStamp = new Date(time).getTime()
+    return parseTime(timeStamp, '{y}-{m}-{d}');
+}
+
+const handleArticleList = data => {
+    for (let i = 0; i < data.length; i++) {
+        data[i].createdAt = handleFormTime(data[i].createdAt);
+        for (let j = 0; j < CATES.length; j++) {
+            if (data[i].type === CATES[j].value) {
+                data[i].type = CATES[j].label
+            }
+        }
+    }
+    return data;
+}
+
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initArticleState;
     switch (action.type) {
         case ARTICLE_LIST:
             return Object.assign({}, state, {
-                articleList: action.list
+                articleList: handleArticleList(action.list)
             });
         case ARTICLE_TYPE:
             return Object.assign({}, state, {

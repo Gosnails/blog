@@ -3,15 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import HomeComponent from '@/components/home/home.jsx';
 import { getArticleList } from '@/api/article.js';
+import { CATES } from '@/utils/config.js';
 import { setArticleList, setArticleCates, setArticlePageNum, setArticleLoading } from '@/reducers/article'
-
-const CATES = [
-    { label: '全部文章', value: '' },
-    { label: 'Web开发', value: 'web' },
-    { label: 'NodeJs', value: 'node' },
-    { label: '性能优化', value: 'optimize' },
-    { label: '项目总结', value: 'summary' }
-]
 
 class Home extends React.Component {
     constructor(props) {
