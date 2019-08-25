@@ -13,6 +13,27 @@ const HomeComponent = props => (
             <h2 className={styles.title}>{props.title}</h2>
             <div className={styles.time}>日期：{props.time}</div>
             <div className={styles.html} dangerouslySetInnerHTML={{ __html: props.content }}></div>
+            <div className={styles.commentPust}>
+                <div className={styles.commentPustItem}>
+                    <textarea></textarea>
+                </div>
+                <div className={styles.commentPustItem}>
+                    <input />
+                    <span className={styles.label}>昵称</span>
+                </div>
+                <div className={styles.commentPustItem}>
+                    <input />
+                    <span className={styles.label}>邮箱</span>
+                </div>
+                <div className={styles.commentPustItem}>
+                    <button>
+                        <span>提交</span>
+                    </button>
+                </div>
+            </div>
+            <div className={styles.commentGet}>
+
+            </div>
         </div>)}
     </div>
 )
