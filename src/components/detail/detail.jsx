@@ -15,18 +15,18 @@ const HomeComponent = props => (
             <div className={styles.html} dangerouslySetInnerHTML={{ __html: props.content }}></div>
             <div className={styles.commentPust}>
                 <div className={styles.commentPustItem}>
-                    <textarea></textarea>
+                    <textarea value={props.comment} onChange={props.onCommentChange} />
                 </div>
                 <div className={styles.commentPustItem}>
-                    <input />
+                    <input type="text" value={props.name} onChange={props.onNameChange} />
                     <span className={styles.label}>昵称</span>
                 </div>
                 <div className={styles.commentPustItem}>
-                    <input />
+                    <input type="text" value={props.email} onChange={props.onEmailChange} />
                     <span className={styles.label}>邮箱</span>
                 </div>
                 <div className={styles.commentPustItem}>
-                    <button>
+                    <button onClick={props.onSubmit}>
                         <span>提交</span>
                     </button>
                 </div>

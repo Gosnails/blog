@@ -73,7 +73,7 @@
     display: block;
     box-sizing: border-box;
     width: 100%;
-    min-    : 5.125em;
+    min-height : 5.125em;
     max-height: 15em;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.1);

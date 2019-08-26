@@ -1,6 +1,6 @@
 import React from 'react';
 import DetailComponent from '@/components/detail/detail.jsx';
-import { getArticleDetail } from '@/api/article.js';
+import { getArticleDetail, addComment } from '@/api/article.js';
 import { parseTime } from '@/utils';
 import marked from 'marked'
 import hljs from "highlight.js";
@@ -14,8 +14,15 @@ class Detail extends React.Component {
             content: '',
             cover: '',
             time: '',
+            name: '',
+            email: '',
+            comment: '',
             loading: true
         }
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handleCommentChange = this.handleCommentChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
         marked.setOptions({
@@ -43,13 +50,42 @@ class Detail extends React.Component {
             })
         })
     }
+    handleCommentChange(event) {
+        this.setState({ comment: event.target.value });
+    }
+    handleNameChange(event) {
+        this.setState({ name: event.target.value });
+    }
+    handleEmailChange(event) {
+        this.setState({ email: event.target.value });
+    }
+    handleSubmit() {
+        const { name, email, comment } = this.state
+        addComment({ name, email, comment, articleId: this.props.match.params.id }).then(data => {
+            console.log(data)
+        })
+    }
     _handleFormTime(time) {
         let timeStamp = new Date(time).getTime()
         return parseTime(timeStamp);
     }
     render() {
+        const { name, email, comment, cover, time, title, content, loading } = this.state;
         return (
-            <DetailComponent cover={this.state.cover} time={this.state.time} title={this.state.title} content={this.state.content} loading={this.state.loading} />
+            <DetailComponent
+                name={name}
+                email={email}
+                comment={comment}
+                cover={cover}
+                time={time}
+                title={title}
+                content={content}
+                loading={loading}
+                onCommentChange={this.handleCommentChange}
+                onEmailChange={this.handleEmailChange}
+                onNameChange={this.handleNameChange}
+                onSubmit={this.handleSubmit}
+            />
         )
     }
 }

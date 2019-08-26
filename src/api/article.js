@@ -13,3 +13,11 @@ export function getArticleDetail(id) {
         method: 'get'
     })
 }
+
+export function addComment(params) {
+    return request({
+        url: '/comment',
+        method: 'post',
+        data: params
+    })
+}
