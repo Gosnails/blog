@@ -1,6 +1,7 @@
 .grid {
     width: 100%;
     max-width: 760px;
+    padding-bottom: 30px;
     margin: 0 auto;
 }
 
@@ -20,6 +21,9 @@
     max-height: 400px;
     overflow: hidden;
 
+}
+.html {
+    margin-bottom: 50px;
 }
 
 .html blockquote {
@@ -61,6 +65,10 @@
     padding: 0;
     color: #333;
     background-color: #f8f8f8;
+}
+
+.commentPust {
+    margin-bottom: 50px;
 }
 
 .commentPustItem {
@@ -124,4 +132,33 @@
 
 .label {
     margin-left: 20px;
+}
+
+.commentHeader {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.commentList 
+.commentListItem {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.commentListHeader {
+    color: #999;
+    margin-bottom: 10px;
+}
+.name {
+    color: #6190e8;
+    margin-right: 5px;
+}
+
+.comment {
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.commentTime {
+    margin-left: 5px;
 }

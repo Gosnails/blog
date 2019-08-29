@@ -21,3 +21,11 @@ export function addComment(params) {
         data: params
     })
 }
+
+export function getComment(params) {
+    return request({
+        url: `/comment`,
+        method: 'get',
+        params
+    })
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import DetailComponent from '@/components/detail/detail.jsx';
-import { getArticleDetail, addComment } from '@/api/article.js';
+import { getArticleDetail, addComment, getComment } from '@/api/article.js';
 import { parseTime } from '@/utils';
 import marked from 'marked'
 import hljs from "highlight.js";
@@ -17,6 +17,7 @@ class Detail extends React.Component {
             name: '',
             email: '',
             comment: '',
+            commentList: '',
             loading: true
         }
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -49,6 +50,7 @@ class Detail extends React.Component {
                 time: this._handleFormTime(data.createdAt)
             })
         })
+        this._getComment();
     }
     handleCommentChange(event) {
         this.setState({ comment: event.target.value });
@@ -61,8 +63,17 @@ class Detail extends React.Component {
     }
     handleSubmit() {
         const { name, email, comment } = this.state
-        addComment({ name, email, comment, articleId: this.props.match.params.id }).then(data => {
-            console.log(data)
+        addComment({ name, email, content: comment, articleId: this.props.match.params.id }).then(data => {
+            this.setState({ name: '', email: '', comment: '' });
+            this._getComment();
+        })
+    }
+    _getComment() {
+        getComment({ articleId: this.props.match.params.id }).then(res => {
+            for (let i = 0; i < res.length; i++) {
+                res[i].createdAt = this._handleFormTime(res[i].createdAt)
+            }
+            this.setState({ commentList: res })
         })
     }
     _handleFormTime(time) {
@@ -70,7 +81,7 @@ class Detail extends React.Component {
         return parseTime(timeStamp);
     }
     render() {
-        const { name, email, comment, cover, time, title, content, loading } = this.state;
+        const { name, email, comment, cover, time, title, content, loading, commentList } = this.state;
         return (
             <DetailComponent
                 name={name}
@@ -81,6 +92,7 @@ class Detail extends React.Component {
                 title={title}
                 content={content}
                 loading={loading}
+                commentList={commentList}
                 onCommentChange={this.handleCommentChange}
                 onEmailChange={this.handleEmailChange}
                 onNameChange={this.handleNameChange}
