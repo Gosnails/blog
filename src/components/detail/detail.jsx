@@ -15,7 +15,6 @@ const comment = commentList => {
             <div className={styles.comment}>{item.content}</div>
             
         </div>)
-
     })
 }
 
@@ -50,9 +49,7 @@ const HomeComponent = props => (
             <div className={styles.commentGet}>
                 {props.commentList.length ? (<div className={styles.commentList}>
                     {comment(props.commentList)}
-                </div>) : <p>来做第一个留言的人吧！
-
-</p>}
+                </div>) : <p>来做第一个留言的人吧！</p>}
             </div>
         </div>)}
     </div>
