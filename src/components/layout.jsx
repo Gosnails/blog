@@ -1,6 +1,9 @@
 import React from 'react';
 import Head from 'next/head'
 import Header from './header'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { thunkArticleList, setArticleLoading } from '../reducers/article'
 import './layout.css'
 
 class Layout extends React.Component {
@@ -67,4 +70,25 @@ class Layout extends React.Component {
   }
 }
 
-export default Layout;
+Layout.propTypes = {
+  articleList: PropTypes.array,
+  loading: PropTypes.bool,
+  onArticleList: PropTypes.func,
+  onArticleLoading: PropTypes.func,
+}
+
+const mapStateToProps = state => ({
+  articleList: state.article.articleList,
+  loading: state.article.loading
+});
+
+const mapDispatchToProps = dispatch => ({
+  onArticleList: (params) => dispatch(thunkArticleList(params)),
+  onArticleLoading: () => dispatch(setArticleLoading()),
+});
+const LayoutConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Layout);
+
+export default LayoutConnect;

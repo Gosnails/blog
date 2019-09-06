@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Article from '../src/components/article';
 import Comment from '../src/components/comment';
 import Layout from '../src/components/layout';
@@ -99,6 +100,13 @@ class Post extends React.Component {
             </Layout>
         )
     }
+}
+
+Post.propTypes = {
+    cover: PropTypes.string,
+    time: PropTypes.string,
+    title: PropTypes.string,
+    content: PropTypes.string
 }
 
 export default Post;

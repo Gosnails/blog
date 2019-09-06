@@ -6,24 +6,21 @@ import List from '../src/components/list';
 import Classify from '../src/components/classify';
 import Layout from '../src/components/layout';
 import Loading from '../src/components/loading';
-import { getArticleList } from '../src/api/article';
 import { CATES } from '../src/utils/config';
 import { thunkArticleList } from '../src/reducers/article'
 
 class Home extends React.Component {
 
-    static async getInitialProps({reduxStore}) {
+    static async getInitialProps({ reduxStore }) {
         await reduxStore.dispatch(thunkArticleList());
         return {}
     }
 
     constructor(props) {
-        console.log(props)
         super(props)
         this.state = {
             type: '',
-            page: 1,
-            loading: false
+            page: 1
         }
         this.handleHistoryPush = this.handleHistoryPush.bind(this)
         this.HandleCates = this.HandleCates.bind(this)
@@ -41,14 +38,12 @@ class Home extends React.Component {
         }
     }
     _getArticleList(type) {
-        // this.setState({loading: true})
-        this.props.onArticleList({ type, page: this.state.pageNum })
-        // getArticleList().then(res => {
-        //     this.setState({ data: res.data, loading: false })
-        // })
+        // this.props.onArticleLoading()
+        this.props.onArticleList({ type, page: this.state.page })
     }
     render() {
-        const {type, loading} = this.state;
+        const { type } = this.state;
+        const { articleList, loading } = this.props;
         return (
             <Layout title="首页">
                 <Classify
@@ -57,7 +52,7 @@ class Home extends React.Component {
                     onCates={this.HandleCates}
                 />
                 {loading ? <Loading /> : (<List
-                    data={this.props.articleList}
+                    data={articleList}
                     onHistoryPush={this.handleHistoryPush}
                 />)}
             </Layout>
@@ -65,10 +60,15 @@ class Home extends React.Component {
     }
 }
 
+Home.propTypes = {
+    articleList: PropTypes.array,
+    loading: PropTypes.bool,
+    onArticleList: PropTypes.func
+}
 
 const mapStateToProps = state => ({
     articleList: state.article.articleList,
-    count: state.article.count
+    loading: state.article.loading
 });
 
 const mapDispatchToProps = dispatch => ({

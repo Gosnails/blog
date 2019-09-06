@@ -83,7 +83,7 @@ const List = props => (
 )
 
 List.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array,
     onHistoryPush: PropTypes.func,
 }
 
