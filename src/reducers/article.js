@@ -3,11 +3,9 @@ import { getArticleList } from '../api/article';
 import { parseTime } from '../utils';
 
 const ARTICLE_LIST = 'blog/article/ARTICLE_LIST';
-const ADD = 'blog/article/add';
 
 const initArticleState = {
-    articleList: [],
-    count: 0
+    articleList: []
 };
 
 
@@ -30,10 +28,6 @@ const reducer = function (state, action) {
             return Object.assign({}, state, {
                 articleList: action.list
             });
-        case ADD:
-            return Object.assign({}, state, {
-                count: state.count + 1
-            });
         default:
             return state;
     }
@@ -41,10 +35,9 @@ const reducer = function (state, action) {
 
 const thunkArticleList = function (params) {
     return (dispatch) => {
-        getArticleList(params).then(response => {
+        return getArticleList(params).then(response => {
             const data = response.data
             dispatch(setArticleList(data))
-            return data
         })
     }
 }
@@ -56,18 +49,10 @@ const setArticleList = function (list) {
     };
 }
 
-const addNum = function (num) {
-    console.log(num)
-    return {
-        type: ADD,
-        num: num
-    };
-}
 export {
     reducer as
         default,
     initArticleState,
     setArticleList,
-    thunkArticleList,
-    addNum
+    thunkArticleList
 };

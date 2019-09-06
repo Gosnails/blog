@@ -13,9 +13,7 @@ import { thunkArticleList } from '../src/reducers/article'
 class Home extends React.Component {
 
     static async getInitialProps({reduxStore}) {
-        const onArticleList = () => reduxStore.dispatch(thunkArticleList());
-        reduxStore.dispatch({type: 'blog/article/add'})
-        const articleList = await onArticleList();
+        await reduxStore.dispatch(thunkArticleList());
         return {}
     }
 
