@@ -1,11 +1,13 @@
-import { createStore, compose } from 'redux';
-import guiReducer, { guiInitialState, guiMiddleware } from '@/reducers';
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(guiMiddleware);
+import { createStore } from 'redux';
+import guiReducer, { guiInitialState, enhancer } from './reducers';
 
-const store = createStore(
-    guiReducer,
-    guiInitialState,
-    enhancer
-);
-export default store;
+
+export default function initializeStore(state) {
+    const store = createStore(
+        guiReducer,
+        Object.assign({}, guiInitialState, state),
+        enhancer
+    );
+    return store;
+
+}

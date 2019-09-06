@@ -10,7 +10,7 @@ import 'highlight.js/styles/tomorrow.css';
 
 class Post extends React.Component {
 
-    static async getInitialProps({ query }) {
+    static async getInitialProps({ ctx }) {
         marked.setOptions({
             renderer: new marked.Renderer(),
             highlight: function (code) {
@@ -25,8 +25,8 @@ class Post extends React.Component {
             smartypants: false,
             xhtml: false
         });
-        const id = query.id;
-        const data = await getArticleDetail(query.id);
+        const id = ctx.query.id;
+        const data = await getArticleDetail(id);
         data.content = marked(data.content);
         return { data, id }
     }
@@ -86,7 +86,7 @@ class Post extends React.Component {
                     title={title}
                     content={content}
                 />
-                <Comment 
+                <Comment
                     name={name}
                     email={email}
                     comment={comment}
