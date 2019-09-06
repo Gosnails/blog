@@ -1,9 +1,10 @@
 import React from 'react';
 import Head from 'next/head'
+import Router from 'next/router'
 import Header from './header'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { thunkArticleList, setArticleLoading } from '../reducers/article'
+import { thunkArticleList } from '../reducers/article'
 import './layout.css'
 
 class Layout extends React.Component {
@@ -20,16 +21,13 @@ class Layout extends React.Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
-    // this.props.onArticleKeywords(event.target.value);
   }
   handleSearch(e) {
     if (e.keyCode === 13) {
-      this.props.history.push(`/`);
-      this.props.onArticleLoading(true)
-      getArticleList({ type: this.props.type, page: this.props.pageNum, q: this.props.keywords }).then(res => {
-        this.props.onArticleLoading(false);
-        this.props.onArticleList(res.data);
-      })
+      // Router.push({
+      //   pathname: '/'
+      // })
+      this.props.onArticleList({q: this.state.value})
     }
   }
   handleToggle() {
@@ -73,8 +71,7 @@ class Layout extends React.Component {
 Layout.propTypes = {
   articleList: PropTypes.array,
   loading: PropTypes.bool,
-  onArticleList: PropTypes.func,
-  onArticleLoading: PropTypes.func,
+  onArticleList: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -83,8 +80,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onArticleList: (params) => dispatch(thunkArticleList(params)),
-  onArticleLoading: () => dispatch(setArticleLoading()),
+  onArticleList: (params) => dispatch(thunkArticleList(params))
 });
 const LayoutConnect = connect(
   mapStateToProps,

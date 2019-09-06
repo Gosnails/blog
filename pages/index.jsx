@@ -38,7 +38,6 @@ class Home extends React.Component {
         }
     }
     _getArticleList(type) {
-        // this.props.onArticleLoading()
         this.props.onArticleList({ type, page: this.state.page })
     }
     render() {

@@ -45,11 +45,10 @@ const reducer = function (state, action) {
                 loading: action.loading
             });
         case ARTICLE_PARAMS:
-            console.log(action)
             return Object.assign({}, state, {
-                type: action.type,
-                page: action.loading,
-                q: action.loading,
+                type: action.params.type,
+                page: action.params.page,
+                q: action.params.q,
             });
         default:
             return state;
