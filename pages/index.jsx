@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import Router from 'next/router'
 import List from '../src/components/list';
 import Classify from '../src/components/classify';
 import Layout from '../src/components/layout';

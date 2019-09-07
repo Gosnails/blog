@@ -1,7 +1,9 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-
+import Router from 'next/router'
 import App from 'next/app'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import withRedux from '../src/lib/with-redux-app'
 
 class MyApp extends App {
@@ -26,6 +28,11 @@ class MyApp extends App {
 
     render() {
         const { Component, pageProps, reduxStore } = this.props
+        Router.onRouteChangeStart = (url) => {
+            NProgress.start()
+        }
+        Router.onRouteChangeComplete = () => NProgress.done()
+        Router.onRouteChangeError = () => NProgress.done()
         return (
             <Provider store={reduxStore}>
                 <Component {...pageProps} />
