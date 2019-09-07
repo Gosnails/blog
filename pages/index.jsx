@@ -30,7 +30,7 @@ class Home extends React.Component {
         Router.push({
             pathname: '/post',
             query: { id }
-        })
+        }, `/post/${id}`)
     }
     HandleCates(type) {
         if (type !== this.state.type) {
