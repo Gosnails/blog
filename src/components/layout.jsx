@@ -6,7 +6,7 @@ import BackTop from './back-top'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { thunkArticleList } from '../reducers/article'
-import './layout.css'
+import '../style/layout.css'
 
 class Layout extends React.Component {
   constructor(props) {
