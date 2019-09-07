@@ -27,10 +27,7 @@ class Home extends React.Component {
         this.HandleCates = this.HandleCates.bind(this)
     }
     handleHistoryPush(id) {
-        Router.push({
-            pathname: '/post',
-            query: { id }
-        }, `/post/${id}`)
+        Router.push(`/post?id=${id}`, `/post/${id}`)
     }
     HandleCates(type) {
         if (type !== this.state.type) {
