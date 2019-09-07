@@ -1,9 +1,10 @@
 import { applyMiddleware, compose, combineReducers } from 'redux';
-import throttle from 'redux-throttle';
+import articleReducer, { initArticleState } from './article';
+import thunk from 'redux-thunk';
+// import logger from 'redux-logger';
 
-import articleReducer, { initArticleState } from '@/reducers/article';
-
-const guiMiddleware = compose(applyMiddleware(throttle(300, { leading: true, trailing: true })));
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = applyMiddleware(thunk);
 
 const guiInitialState = {
     article: initArticleState
@@ -15,5 +16,5 @@ const guiReducer = combineReducers({
 export {
     guiReducer as default,
     guiInitialState,
-    guiMiddleware
+    enhancer
 };

@@ -1,19 +1,14 @@
 
-import { parseTime } from '@/utils';
-import { CATES } from '@/utils/config';
+import { getArticleList } from '../api/article';
+import { parseTime } from '../utils';
+import { CATES } from '../utils/config';
 
 const ARTICLE_LIST = 'blog/article/ARTICLE_LIST';
-const ARTICLE_TYPE = 'blog/article/ARTICLE_TYPE';
-const ARTICLE_KEYWORDS = 'blog/article/ARTICLE_KEYWORDS';
-const ARTICLE_PAGE_NUM = 'blog/article/ARTICLE_PAGE_NUM';
 const ARTICLE_LOADING = 'blog/article/ARTICLE_LOADING';
 
 const initArticleState = {
     articleList: [],
-    type: '',
-    keywords: '',
-    pageNum: 1,
-    loading: true
+    loading: false
 };
 
 
@@ -41,66 +36,49 @@ const reducer = function (state, action) {
             return Object.assign({}, state, {
                 articleList: handleArticleList(action.list)
             });
-        case ARTICLE_TYPE:
+        case ARTICLE_LOADING:
             return Object.assign({}, state, {
-                type: action.cates
+                loading: action.loading
             });
-        case ARTICLE_KEYWORDS:
-            return Object.assign({}, state, {
-                keywords: action.keywords
-            });
-        case ARTICLE_PAGE_NUM:
-            return Object.assign({}, state, {
-                pageNum: action.num
-            });
-            case ARTICLE_LOADING:
-                return Object.assign({}, state, {
-                    loading: action.bool
-                });
         default:
             return state;
     }
 };
-
-const setArticleLoading = function (bool) {
-    return {
-        type: ARTICLE_LOADING,
-        bool: bool
-    };
-}
-const setArticlePageNum = function (num) {
-    return {
-        type: ARTICLE_PAGE_NUM,
-        num: num
-    };
-}
-
-const setArticleKeywords = function (keywords) {
-    return {
-        type: ARTICLE_KEYWORDS,
-        keywords: keywords
-    };
+const thunkArticleList = function (params = {}, bool) {
+    return (dispatch) => {
+        if (!bool) {
+            dispatch(setArticleLoading(true))
+        }
+        return getArticleList(params).then(response => {
+            const data = response.data
+            if (!bool) {
+                dispatch(setArticleLoading(false))
+            }
+            dispatch(setArticleList(data))
+        })
+    }
 }
 
-const setArticleCates = function (cates) {
-    return {
-        type: ARTICLE_TYPE,
-        cates: cates
-    };
-}
 const setArticleList = function (list) {
     return {
         type: ARTICLE_LIST,
         list: list
     };
 }
+
+const setArticleLoading = function (bool) {
+    return {
+        type: ARTICLE_LOADING,
+        loading: bool
+    };
+}
+
+
 export {
     reducer as
         default,
     initArticleState,
     setArticleList,
-    setArticleCates,
-    setArticleKeywords,
-    setArticlePageNum,
+    thunkArticleList,
     setArticleLoading
 };

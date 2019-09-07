@@ -1,7 +1,6 @@
 import React from 'react';
 import raf from 'raf';
 import PropTypes from 'prop-types';
-import styles from './back-top.module.css'
 
 function getDefaultTarget() {
     return window;
@@ -87,12 +86,55 @@ class BackTop extends React.Component {
             this.props.onClick(e);
         }
     };
+    componentWillUnmount() {
+        const getTarget = this.props.target || getDefaultTarget;
+        getTarget().removeEventListener('scroll', this.handleScroll);
+    }
     render() {
         return (this.state.visible ? (
-            <div className={styles.backTop} onClick={this.scrollToTop}>
-                <div className={styles.inner}>
+            <div className="backTop" onClick={this.scrollToTop}>
+                <div className="inner">
                     UP
                 </div>
+                <style jsx>{`
+                    .backTop {
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        margin: 0;
+                        padding: 0;
+                        color: rgba(0, 0, 0, 0.65);
+                        font-size: 14px;
+                        font-variant: tabular-nums;
+                        line-height: 1.5;
+                        list-style: none;
+                        -webkit-font-feature-settings: 'tnum';
+                        font-feature-settings: 'tnum';
+                        position: fixed;
+                        right: 50px;
+                        bottom: 50px;
+                        z-index: 10;
+                        width: 40px;
+                        height: 40px;
+                        cursor: pointer;
+                    }
+                    
+                    .inner {
+                        height: 40px;
+                        width: 40px;
+                        line-height: 40px;
+                        border-radius: 4px;
+                        background-color: rgba(97, 144, 232, 0.85);
+                        color: #fff;
+                        text-align: center;
+                        font-size: 20px;
+                    }
+                    
+                    .inner:hover {
+                        background-color: rgba(97, 144, 232, 1);
+                        -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+                        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+                    }
+                `}</style>
             </div>
         ) : null)
     }
