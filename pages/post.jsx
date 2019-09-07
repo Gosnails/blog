@@ -26,10 +26,11 @@ class Post extends React.Component {
             smartypants: false,
             xhtml: false
         });
+        const pathname = ctx.pathname
         const id = ctx.query.id;
         const data = await getArticleDetail(id);
         data.content = marked(data.content);
-        return { data, id }
+        return { data, id, pathname }
     }
 
     constructor(props) {
@@ -80,7 +81,7 @@ class Post extends React.Component {
         const { cover, createdAt, title, content } = this.props.data;
         const { name, email, comment, commentList } = this.state;
         return (
-            <Layout title={title}>
+            <Layout title={title} path={this.props.pathname}>
                 <Article
                     cover={cover}
                     time={this._handleFormTime(createdAt)}

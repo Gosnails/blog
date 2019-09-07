@@ -5,14 +5,10 @@ import { CATES } from '../utils/config';
 
 const ARTICLE_LIST = 'blog/article/ARTICLE_LIST';
 const ARTICLE_LOADING = 'blog/article/ARTICLE_LOADING';
-const ARTICLE_PARAMS = 'blog/article/ARTICLE_PARAMS';
 
 const initArticleState = {
     articleList: [],
-    loading: false,
-    type: '',
-    page: 1,
-    q: ''
+    loading: false
 };
 
 
@@ -44,24 +40,20 @@ const reducer = function (state, action) {
             return Object.assign({}, state, {
                 loading: action.loading
             });
-        case ARTICLE_PARAMS:
-            return Object.assign({}, state, {
-                type: action.params.type,
-                page: action.params.page,
-                q: action.params.q,
-            });
         default:
             return state;
     }
 };
-const thunkArticleList = function ({ type = initArticleState.type, page = initArticleState.page, q = initArticleState.q } = {}) {
-    const params = { type, page, q }
+const thunkArticleList = function (params = {}, bool) {
     return (dispatch) => {
-        dispatch(setArticleLoading(true))
-        dispatch(setArticleParams(params))
+        if (!bool) {
+            dispatch(setArticleLoading(true))
+        }
         return getArticleList(params).then(response => {
             const data = response.data
-            dispatch(setArticleLoading(false))
+            if (!bool) {
+                dispatch(setArticleLoading(false))
+            }
             dispatch(setArticleList(data))
         })
     }
@@ -80,12 +72,7 @@ const setArticleLoading = function (bool) {
         loading: bool
     };
 }
-const setArticleParams = function (params) {
-    return {
-        type: ARTICLE_PARAMS,
-        params: params
-    };
-}
+
 
 export {
     reducer as

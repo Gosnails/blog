@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head'
 import Router from 'next/router'
 import Header from './header'
+import BackTop from './back-top'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { thunkArticleList } from '../reducers/article'
@@ -12,11 +13,13 @@ class Layout extends React.Component {
     super(props)
     this.state = {
       value: '',
-      expand: false
+      expand: false,
+      show: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
+    this.handleToggleExpand = this.handleToggleExpand.bind(this);
+    this.handleToggleSearch = this.handleToggleSearch.bind(this);
   }
 
   handleChange(event) {
@@ -24,13 +27,13 @@ class Layout extends React.Component {
   }
   handleSearch(e) {
     if (e.keyCode === 13) {
-      // Router.push({
-      //   pathname: '/'
-      // })
-      this.props.onArticleList({q: this.state.value})
+      Router.push({
+        pathname: '/search',
+        query: { q: this.state.value }
+      })
     }
   }
-  handleToggle() {
+  handleToggleExpand() {
     if (this.state.expand) {
       this.setState({ expand: false });
       return;
@@ -38,9 +41,17 @@ class Layout extends React.Component {
     this.setState({ expand: true });
   }
 
+  handleToggleSearch() {
+    if (this.state.show) {
+      this.setState({ show: false });
+      return;
+    }
+    this.setState({ show: true });
+  }
+
   render() {
-    const { children, title } = this.props;
-    const { expand, value } = this.state;
+    const { children, title, path } = this.props;
+    const { expand, show, value } = this.state;
     return (
       <div className="root">
         <Head>
@@ -51,9 +62,12 @@ class Layout extends React.Component {
 
         <header>
           <Header
+            path={path}
             expand={expand}
+            show={show}
             value={value}
-            onToggle={this.handleToggle}
+            onToggleExpand={this.handleToggleExpand}
+            onToggleSearch={this.handleToggleSearch}
             onSearch={this.handleSearch}
             onChange={this.handleChange}
           />
@@ -62,6 +76,8 @@ class Layout extends React.Component {
         <main className="content">
           {children}
         </main>
+
+        <BackTop />
 
       </div>
     )

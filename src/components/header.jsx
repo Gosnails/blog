@@ -3,30 +3,28 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Link from 'next/link'
 
-
-
 const Header = props => (
     <div className="header">
         <div className="grid">
             <div className="logo">
             </div>
-            <span className="toggle" onClick={props.onToggle}>
-                <i className="iconfont icon-ego-menu"></i>
+            <span className="toggle" onClick={props.onToggleExpand}>
+                <i className="icon-ego-menu"></i>
             </span>
             <div className={classNames('main', { ['expand']: props.expand })}>
                 <div className='inner'>
                     <div className="nav">
                         <ul className="list">
                             <li className="item">
-                                <Link href="/"><a className="active">首页</a></Link>
+                                <Link href="/"><a className={classNames({ ['active']: props.path === '/' })}>首页</a></Link>
                             </li>
                         </ul>
                     </div>
-                    <div className={classNames('search', 'active')}>
-                        <span className={'searchIco'}>
-                            <i className="iconfont icon-sousuo"></i>
+                    <div className={classNames('search', { ['active']: props.show })}>
+                        <span className="searchIco" onClick={props.onToggleSearch}>
+                            <i className="icon-sousuo"></i>
                         </span>
-                        <div className={classNames('searchForm', 'show')}>
+                        <div className={classNames('searchForm', { ['show']: props.show })}>
                             <input className="searchIpt" onKeyDown={props.onSearch} value={props.value} onChange={props.onChange} type="text" />
                         </div>
                     </div>
@@ -84,6 +82,18 @@ const Header = props => (
                 color: #6190e8;
                 text-align: center;
             }
+
+            .icon-ego-menu {
+                display:block;
+                height: 30px;
+                width: 30px;
+                background-image: url('data:img/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAgBAMAAACIv8e9AAAAG1BMVEUAAABgkOhgkOlgkOhgj+hg
+                j+9gkOhgj+dhkOilmbnkAAAACHRSTlMAgD/AcBCgYLdkO60AAABASURBVCjPY6AuCDNGALMAsJBE
+                BxIQAAt5IAsVgIWYlJAAwwCBEEEEEGHAdKoDDiFMjfQHmEGIGdCY0YEt0qgKAIv0NKWZx9RtAAAA
+                AElFTkSuQmCC');
+                background-repeat: no-repeat;
+                background-size: 30px 30px;
+            }
             
             .nav {
                 float: left;
@@ -132,9 +142,9 @@ const Header = props => (
             
             
             }
-            
+
             .search.active .searchIco {
-                background: #eee;
+                background-color: #eee;
             }
             
             .searchIco {
@@ -145,7 +155,27 @@ const Header = props => (
                 width: 30px;
                 line-height: 30px;
                 text-align: center;
-                color: #333;
+            }
+
+            .icon-sousuo {
+                display:block;
+                height: 20px;
+                width: 20px;
+                margin-left: 5px;
+                margin-top: 5px;
+                background-image: url('data:img/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAllBMVEUAAAAvLy8yMjIyMjIyMjIx
+                MTEMDAwAAAAyMjIyMjIyMjIyMjIwMDAuLi4fHx8zMzMyMjIyMjIyMjIyMjIxMTEyMjIxMTEyMjIy
+                MjIyMjIyMjIzMzMyMjIyMjIyMjIyMjIyMjIxMTEvLy8rKysrKysyMjIyMjIyMjIyMjIxMTEyMjIz
+                MzMyMjIyMjIyMjIyMjIzMzMzMzPcTokHAAAAMXRSTlMAD/P32DsDAe/nyFIvGQjOqaSVY0Y2Ht+/
+                urSwnYR+eUw/FRML65GIdHFn04xuXlsjVcsvOQAAAVJJREFUOMt90OmWojAQhuEPgqyKoIi7re3S
+                2tvMe/83N2TkNLagz49U5VAklVLj9TLzQhMNs/FAHfpLGlmr5DUDE39+JcX3ywxw3+9+j2DkqLa/
+                RLDy1egZpv0qTt7rqvQEs7Q5/0i8V/DHAwpdrWEZqDbDc5Qugbi5+gTnOk1wSx1iyEs1/AWhc808
+                1tICU9w9zOVN1hbXUQJb3dkQycrJFUwZ6d4AJja6JCrgr1piNnYqMNCOpdpOrOwQIahWX20vzKt1
+                R6gHxgzteEHWwxNKcNRtRG5DSKFuMWsbFvXAuubQs/GbKHjQwvH/hzRkrA6HkPU1++KYqu0Nt+7e
+                n5uOdySw0ROJYRH8mlr/dudvgFI3evDpNDsP4MO5bXkK7mjcGzi7c1blxgWGtxXpOeKHyctJq0L+
+                duWB8eary77aXisOeqznApmeVRj40DM719vqH4eLJ+xw0Nn3AAAAAElFTkSuQmCC');
+                background-repeat: no-repeat;
+                background-size: 20px 20px;
             }
             
             .searchForm {
@@ -269,10 +299,12 @@ const Header = props => (
 )
 
 Header.propTypes = {
-    onToggle: PropTypes.func,
+    onToggleExpand: PropTypes.func,
+    onToggleSearch: PropTypes.func,
     onSearch: PropTypes.func,
     onChange: PropTypes.func,
     expand: PropTypes.bool.isRequired,
+    show: PropTypes.bool.isRequired,
     value: PropTypes.string.isRequired
 }
 

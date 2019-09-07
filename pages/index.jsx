@@ -11,9 +11,10 @@ import { thunkArticleList } from '../src/reducers/article'
 
 class Home extends React.Component {
 
-    static async getInitialProps({ reduxStore }) {
+    static async getInitialProps({ reduxStore, ctx }) {
+        const pathname = ctx.pathname
         await reduxStore.dispatch(thunkArticleList());
-        return {}
+        return { pathname }
     }
 
     constructor(props) {
@@ -42,9 +43,9 @@ class Home extends React.Component {
     }
     render() {
         const { type } = this.state;
-        const { articleList, loading } = this.props;
+        const { articleList, loading, pathname } = this.props;
         return (
-            <Layout title="首页">
+            <Layout title="首页" path={pathname}>
                 <Classify
                     cates={CATES}
                     type={type}
