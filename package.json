@@ -30,5 +30,14 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2"
   }
 }
