@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link'
 import { BASE_IMG_URL } from '../utils/config.js';
 
 const getList = props => {
     return props.data.map(item => {
         return (
             <div className="el-col el-col-24 el-col-xs-12 el-col-sm-8 el-col-md-6" key={item._id}>
-                <div className="card" onClick={() => props.onHistoryPush(item._id)}>
+                <div className="card">
                     <div className="cover" style={{ background: `url('${BASE_IMG_URL}${item.cover}') rgb(204, 204, 204)` }}></div>
-                    <div className="title">{item.title}</div>
+                    <div className="title">
+                        <Link as={`/post/${item._id}`} href={`/post?id=${item._id}`}>
+                            <a>{item.title}</a>
+                        </Link>
+                    </div>
                     <div className="foot">
                         <span>{item.createdAt}</span>
                         <span className="division">/</span>
@@ -20,7 +25,6 @@ const getList = props => {
                             position: relative;
                             height: 0;
                             padding-top: 80%;
-                            cursor: pointer;
                         }
                         .cover {
                             position: absolute;
@@ -44,7 +48,7 @@ const getList = props => {
                             -o-text-overflow: ellipsis;
                             text-overflow: ellipsis;
                         }
-                        .title:hover {
+                        .title a:hover {
                             color: #6190e8;
                         }
                         
@@ -83,8 +87,7 @@ const List = props => (
 )
 
 List.propTypes = {
-    data: PropTypes.array,
-    onHistoryPush: PropTypes.func,
+    data: PropTypes.array
 }
 
 export default List;

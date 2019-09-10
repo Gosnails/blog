@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import Router from 'next/router'
 import List from '../src/components/list';
 import Classify from '../src/components/classify';
 import Layout from '../src/components/layout';
@@ -23,11 +22,7 @@ class Home extends React.Component {
             type: '',
             page: 1
         }
-        this.handleHistoryPush = this.handleHistoryPush.bind(this)
         this.HandleCates = this.HandleCates.bind(this)
-    }
-    handleHistoryPush(id) {
-        Router.push(`/post?id=${id}`, `/post/${id}`)
     }
     HandleCates(type) {
         if (type !== this.state.type) {
@@ -50,7 +45,6 @@ class Home extends React.Component {
                 />
                 {loading ? <Loading /> : (<List
                     data={articleList}
-                    onHistoryPush={this.handleHistoryPush}
                 />)}
             </Layout>
         )
