@@ -1,6 +1,10 @@
 body {
     margin: 0;
     background-color: #fff;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 1px;
+    color: #333;
 }
 
 ul {
@@ -21,11 +25,12 @@ img {
 .content {
     margin: 0 auto;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .el-row {
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-left: -20px;
+    margin-right: -20px;
 }
 
 .el-row:before,
@@ -40,8 +45,8 @@ img {
 
 .el-col {
     float: left;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin-bottom: 30px;
     box-sizing: border-box;
 }
@@ -50,6 +55,13 @@ img {
     width: 100%;
 }
 
+
+
+@media screen and (max-width: 768px) {
+    .content {
+        width: 512px;
+    }
+}
 @media screen and (max-width: 560px) {
     .content {
         width: 100%;
@@ -57,12 +69,6 @@ img {
 
     .el-col-xs-24 {
         width: 100%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .content {
-        width: 512px;
     }
 }
 

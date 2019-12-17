@@ -6,8 +6,6 @@ import Link from 'next/link'
 const Header = props => (
     <div className="header">
         <div className="grid">
-            <div className="logo">
-            </div>
             <span className="toggle" onClick={props.onToggleExpand}>
                 <i className="icon-ego-menu"></i>
             </span>
@@ -42,6 +40,7 @@ const Header = props => (
                 z-index: 100;
                 margin-bottom: 15px;
                 border-bottom: 1px solid #eee;
+                box-shadow: 0px 2px 3px 0px rgba(227,227,227,0.38);
             }
             
             .grid {

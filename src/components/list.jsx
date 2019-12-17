@@ -24,23 +24,26 @@ const getList = props => {
                     .card {
                             position: relative;
                             height: 0;
-                            padding-top: 80%;
+                            padding-top: 60%;
+                            box-shadow: 0px 2px 10px 0px rgba(46,61,72,0.05);
                         }
                         .cover {
                             position: absolute;
                             top: 0;
                             width: 100%;
-                            height: 75%;
-                            height: calc(100% - 60px);
+                            height: 68%;
+                            height: calc(100% - 70px);
                             background-size: cover !important;
                             background-position: 50% !important;
                         }
                         .title {
                             position: absolute;
-                            bottom: 20px;
+                            bottom: 30px;
                             width: 100%;
                             height: 40px;
                             line-height: 56px;
+                            padding-left: 10px;
+                            padding-right: 10px;
                             box-sizing: border-box;
                             font-size: 16px;
                             overflow: hidden;
@@ -54,10 +57,12 @@ const getList = props => {
                         
                         .foot {
                             position: absolute;
-                            bottom: 0;
+                            bottom: 10px;
                             width: 100%;
                             height: 20px;
                             line-height: 20px;
+                            padding-left: 10px;
+                            padding-right: 10px;
                             font-size: 12px;
                             color: #555;
                         }
