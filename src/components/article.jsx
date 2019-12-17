@@ -39,6 +39,7 @@ const Article = props => (
         }
         .html {
             margin-bottom: 50px;
+            line-height: 1.75;
         }
     `}</style>
     </div>
