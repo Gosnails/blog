@@ -16,6 +16,9 @@ const Header = props => (
                             <li className="item">
                                 <Link href="/"><a className={classNames({ ['active']: props.path === '/' })}>首页</a></Link>
                             </li>
+                            <li className="item">
+                                <a target="_blank" href="https://gosnails.github.io/blogs/">Hexo</a>
+                            </li>
                         </ul>
                     </div>
                     <div className={classNames('search', { ['active']: props.show })}>
