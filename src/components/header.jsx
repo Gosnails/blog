@@ -6,6 +6,11 @@ import Link from 'next/link'
 const Header = props => (
     <div className="header">
         <div className="grid">
+            <div className="logo">
+                <a href="/">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHYAAAA7CAMAAACZv46RAAABO1BMVEUAAAButvJhkOhhkOhhkOhhkOhhkOiA5/9nou2A5/9hkehhkOhhkOiA5/+A5/+A5/9ilOmA5/9hkOiA5/9hkOhhkOiA5/+A5/9hkOhhkOiA5/+A5/9hkOiA5/9hkOiA5/9hkOiA5/9hkOiA5/+A5/9hkOhhkOiA5/9hkOiA5/+A5/9hkOhhkOh62PuA5/+A5/9hkOiA5/9hkOiA5/9hkOiA5/9hkOiA5/9hkOiA5/+A5/9hkOhhkeiA5/+A5/9hkOiA5/9hkOhhkOhhkOhhkOiA5/9hkehppe6A5/9lm+t0xfZppu5jlelhkOiA5/+A5/9hkOiA5/+A5/9hkOh0xfaA5/9ssPBhkOiA5/9hkOiA5/9ilOp40/pxvfRopO1oo+1km+t94P183fx1yPd0xfZzwvVtsvFsrvBnou2yM6vQAAAAWXRSTlMAAlvyfEkmEQbS0simZFhBQB0OB/v28vDl4NvLwbmwppSKinVvbVRIODAjHhD++evr49rVu52bk4OCaWZjUT09NzMxLRb7+ffn2dHPy8vDwLmwrp+clpJwG87Oyl0AAANoSURBVFjDrdlnV+JAFAbgS5eiIEUUwbUhRXfXtay9997LvWB31f//CxbOnpzNMJm5JPDwNZCThMn73gSa11H76Lhqn7ZLFFZHoisB9U+vbbn9RWizzmAwTelMZvEerMR9M6EpnAoPxKCNov1kyEVBthlBQ2Qc2qT7G5kEu6CRL4wm8225xK4FEk0HGrcIJ9Gs1w0t6/pFjeZA5MVG2SK0ZP2UZOkymG33ouxqGxwLzJKVnUWX+RS70UrSCw6N/CBLP0aE3eZTaKlvDBxYyZDKLJj9RpWZTbCplCO1IeFoB1FtcMLWRZ0jHXHlulHDcwdNG+0hrW4w86NWyAdNKQRJLweiLOoN+IFVviTG/jqIYilkDHcw8TZEnJ5OaORl9zu5pI23n8QaTUCjiWFknSgjcbWfWGclsDLWh6zIuCLeWL+6QMWLPDkS49ff/3yvkt6CLknHI8iQI/F277FSqTw9vZPat27QWwsjK7thWgFHaPhSHXF/FHjLk8jKG4tp46CC/32+kuxnZ5Oldhg5HuNEH6PoQb73J6BZ/gFk9Pn/nRls9PxGZhdlsMMXQr3fUBO32uqxSobpAtiV9+hPcz0NfdbbfLxQXc8oOBAfRJ16wRvbRUuV+iW+CYAzW+eolFxy6W4vz4clcKx0+IwqXgDXUhKVzrecds4bInqooKXdercros5gHFT4evLygVY8vnpqMX+7PNhVmCZD9RFlobhUOLkyxCtfkNmbfImXoc7fhy2UIb6ePKDo2GicHmyhDPH15PXTvC4PjAzqyCNrctnG9C2pfqHhyFRuNrLICq/x07fa+9NTLdAf925B4O61U4b46VtWrdWX67j0tXnkefnpm6knXBmyNTyWzojVvwoKsRNkDU/Ii2aUGFw9WWLLUMorr5oe4gwlWi1DqRiI1veJcVluQxnKgihHesFCe8qQX1yupGK7ntx5UMMtLh3SmbNVTya0DySERxdDpJazXU82ZzSF02yWVDIrwLAzPKbywtGqn16BQ94kWnELu13cISuzAXBs+wplvdtim0iT7HQdWlLMsnkwx0zfDsiRmAy7QBSYZqZv++RIDPvk0Aty8cZjIjGyCbJojpm+nYoNhKdwKjTjs27r94uZTJrSwWAntFnR795aU795CqxER1YLCXCKf6nFvxTj/QVAASj9yyyYdAAAAABJRU5ErkJggg==" alt="开发笔记" />
+                </a>
+            </div>
             <span className="toggle" onClick={props.onToggleExpand}>
                 <i className="icon-ego-menu"></i>
             </span>
@@ -63,7 +68,7 @@ const Header = props => (
             .logo {
                 height: 100%;
                 float: left;
-                padding-top: 12px;
+                padding-top: 13px;
                 margin-right: 50px;
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
@@ -72,8 +77,12 @@ const Header = props => (
             
             .logo a {
                 display: block;
-                width: 98px;
+                width: 60px;
                 overflow: hidden;
+            }
+
+            .logo a img {
+                display: block;
             }
             
             .toggle {
