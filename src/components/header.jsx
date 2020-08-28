@@ -41,14 +41,16 @@ const Header = props => (
         </div>
         <style jsx>{`
             .header {
+                position: fixed;
+                left: 0;
+                top: 0;
                 height: 60px;
                 width: 100%;
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
                 box-sizing: border-box;
-                background-color: rgba(255, 255, 255, .95);
+                background-color: rgb(255, 255, 255);
                 z-index: 100;
-                margin-bottom: 15px;
                 border-bottom: 1px solid #eee;
                 box-shadow: 0px 2px 3px 0px rgba(227,227,227,0.38);
             }

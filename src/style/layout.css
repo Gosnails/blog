@@ -23,7 +23,7 @@ img {
 }
 
 .content {
-    margin: 0 auto;
+    margin: 75px auto 0;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -60,6 +60,8 @@ img {
 @media screen and (max-width: 768px) {
     .content {
         width: 512px;
+        padding: 0 15px;
+        box-sizing: border-box;
     }
 }
 @media screen and (max-width: 560px) {
