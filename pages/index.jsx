@@ -21,7 +21,7 @@ class Home extends React.Component {
         super(props)
         this.state = {
             type: '',
-            page: 2,
+            page: 1,
             pageSize: 12,
             hasMoreData: true,
             total: props.total
@@ -31,26 +31,35 @@ class Home extends React.Component {
         this.loadFunc = this.loadFunc.bind(this)
     }
     HandleCates(type) {
-        if (type !== this.state.type) {
-            this.setState({ type, page: 1 }, () => {
+        console.log(this.isCan)
+        if (type !== this.state.type && this.isCan) {
+            this.setState({ type, page: 0 }, () => {
                 this.loadFunc();
             })
         }
     }
     async loadFunc() {
         if (!this.isCan) {
-            return
+            return;
         }
-        this.isCan = false
         const { type, pageSize, page } = this.state;
-        const boolean = page === 1 ? false : true;
-        await this.props.onArticleList({ type, page }, boolean, boolean);
-        const hasMoreData = page * pageSize < this.props.total ? true : false;
-        this.setState({page: page + 1, total: this.props.total, hasMoreData});
-        this.isCan = true;
+        const total = this.props.total === 0 ? pageSize : this.props.total;
+        const hasMoreData = page * pageSize < total ? true : false;
+        this.isCan = false;
+        if (hasMoreData) {
+            const newPage = page + 1;
+            const boolean = newPage === 1 ? false : true;
+            await this.props.onArticleList({ type, page: newPage }, boolean, boolean);
+            this.isCan = true;
+            this.setState({ page: newPage, hasMoreData })
+        } else {
+            this.isCan = true;
+            this.setState({ hasMoreData });
+        }
+
     }
     render() {
-        const { type, page, hasMoreData } = this.state;
+        const { type, hasMoreData } = this.state;
         const { articleList, loading, pathname } = this.props;
         return (
             <Layout title="首页" path={pathname}>
@@ -60,7 +69,6 @@ class Home extends React.Component {
                     onCates={this.HandleCates}
                 />
                 {loading ? <Loading /> : (<InfiniteScroll
-                    pageStart={0}
                     loadMore={this.loadFunc}
                     hasMore={hasMoreData}
                     loader={<div className="loader" key={0}>Loading ...</div>}
