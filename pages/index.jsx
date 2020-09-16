@@ -22,7 +22,7 @@ class Home extends React.Component {
         this.state = {
             type: '',
             page: 2,
-            pageSize: 10,
+            pageSize: 12,
             hasMoreData: true,
             total: props.total
         }
