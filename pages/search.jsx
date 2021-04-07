@@ -1,24 +1,26 @@
 import React from 'react';
+import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import Router from 'next/router'
 import { connect } from 'react-redux'
 import List from '../src/components/list';
 import Layout from '../src/components/layout';
 import SearchTit from '../src/components/search-tit';
-import { thunkArticleList } from '../src/reducers/article'
+import { thunkArticleList, setArticleSite } from '../src/reducers/article'
 
 class Search extends React.Component {
 
     static async getInitialProps({ reduxStore, ctx }) {
-        const pathname = ctx.pathname
-        const q = ctx.query.q
+        const pathname = ctx.pathname;
+        const q = ctx.query.q;
+        reduxStore.dispatch(setArticleSite(''));
         await reduxStore.dispatch(thunkArticleList({ q }, true));
         return { q, pathname }
     }
 
     constructor(props) {
         super(props)
-        this.handleHistoryPush = this.handleHistoryPush.bind(this)
+        bindAll(this, ["handleHistoryPush"]);
     }
     handleHistoryPush(id) {
         Router.push({

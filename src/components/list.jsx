@@ -25,6 +25,8 @@ const getList = props => {
                             position: relative;
                             height: 0;
                             padding-top: 60%;
+                            border-bottom-left-radius: 4px;
+                            border-bottom-right-radius: 4px;
                             box-shadow: 0px 2px 10px 0px rgba(46,61,72,0.05);
                         }
                         .cover {
@@ -33,6 +35,8 @@ const getList = props => {
                             width: 100%;
                             height: 68%;
                             height: calc(100% - 70px);
+                            border-top-left-radius: 4px;
+                            border-top-right-radius: 4px;
                             background-size: cover !important;
                             background-position: 50% !important;
                         }

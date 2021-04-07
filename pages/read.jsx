@@ -1,7 +1,7 @@
 import React from 'react';
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import List from '../src/components/list';
 import Classify from '../src/components/classify';
 import Layout from '../src/components/layout';
@@ -10,18 +10,17 @@ import { CATES } from '../src/utils/config';
 import { thunkArticleList, setArticleSite } from '../src/reducers/article';
 import InfiniteScroll from 'react-infinite-scroller';
 
-class Home extends React.Component {
+class Read extends React.Component {
 
     static async getInitialProps({ reduxStore, ctx }) {
-        console.log(new Date().getTime())
         const pathname = ctx.pathname
-        reduxStore.dispatch(setArticleSite(Home.getClassName));
-        await reduxStore.dispatch(thunkArticleList({class: Home.getClassName}));
+        reduxStore.dispatch(setArticleSite(Read.getClassName));
+        await reduxStore.dispatch(thunkArticleList({class: Read.getClassName}));
         return { pathname }
     }
 
     static get getClassName() {
-        return 'original';
+        return 'read';
     }
 
     constructor(props) {
@@ -37,7 +36,7 @@ class Home extends React.Component {
         bindAll(this, ["handleCates", "loadFunc"]);
     }
     componentWillUnmount() {
-        console.log(222222)
+        console.log(3333)
     }
     handleCates(type) {
         if (type !== this.state.type && this.isCan) {
@@ -47,7 +46,7 @@ class Home extends React.Component {
         }
     }
     async loadFunc() {
-        if (!this.isCan || this.props.site !== Home.getClassName) {
+        if (!this.isCan || this.props.site !== Read.getClassName) {
             return;
         }
         const { type, pageSize, page } = this.state;
@@ -57,7 +56,7 @@ class Home extends React.Component {
         if (hasMoreData) {
             const newPage = page + 1;
             const boolean = newPage === 1 ? false : true;
-            await this.props.onArticleList({ type, class: Home.getClassName, page: newPage }, boolean, boolean);
+            await this.props.onArticleList({ type, class: Read.getClassName, page: newPage }, boolean, boolean);
             this.isCan = true;
             this.setState({ page: newPage, hasMoreData })
         } else {
@@ -70,9 +69,9 @@ class Home extends React.Component {
         const { type, hasMoreData } = this.state;
         const { articleList, loading, pathname } = this.props;
         return (
-            <Layout title="首页" path={pathname}>
+            <Layout title="读书" path={pathname}>
                 <Classify
-                    cates={CATES.index}
+                    cates={CATES.read}
                     type={type}
                     onCates={this.handleCates}
                 />
@@ -88,25 +87,25 @@ class Home extends React.Component {
     }
 }
 
-Home.propTypes = {
+Read.propTypes = {
     articleList: PropTypes.array,
     loading: PropTypes.bool,
     onArticleList: PropTypes.func
 }
 
 const mapStateToProps = state => ({
+    site: state.article.site,
     articleList: state.article.articleList,
     loading: state.article.loading,
-    site: state.article.site,
     total: state.article.total
 });
 
 const mapDispatchToProps = dispatch => ({
     onArticleList: (params, isLoading, isJoin) => dispatch(thunkArticleList(params, isLoading, isJoin))
 });
-const HomeConnect = connect(
+const ReadConnect = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home);
+)(Read);
 
-export default HomeConnect
+export default ReadConnect

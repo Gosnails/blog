@@ -10,18 +10,17 @@ import { CATES } from '../src/utils/config';
 import { thunkArticleList, setArticleSite } from '../src/reducers/article';
 import InfiniteScroll from 'react-infinite-scroller';
 
-class Home extends React.Component {
+class Algorithm extends React.Component {
 
     static async getInitialProps({ reduxStore, ctx }) {
-        console.log(new Date().getTime())
         const pathname = ctx.pathname
-        reduxStore.dispatch(setArticleSite(Home.getClassName));
-        await reduxStore.dispatch(thunkArticleList({class: Home.getClassName}));
+        reduxStore.dispatch(setArticleSite(Algorithm.getClassName));
+        await reduxStore.dispatch(thunkArticleList({class: Algorithm.getClassName}));
         return { pathname }
     }
 
     static get getClassName() {
-        return 'original';
+        return 'algorithm';
     }
 
     constructor(props) {
@@ -36,9 +35,6 @@ class Home extends React.Component {
         this.isCan = true;
         bindAll(this, ["handleCates", "loadFunc"]);
     }
-    componentWillUnmount() {
-        console.log(222222)
-    }
     handleCates(type) {
         if (type !== this.state.type && this.isCan) {
             this.setState({ type, page: 0 }, () => {
@@ -47,17 +43,19 @@ class Home extends React.Component {
         }
     }
     async loadFunc() {
-        if (!this.isCan || this.props.site !== Home.getClassName) {
+        console.log(this.props.site)
+        if (!this.isCan || this.props.site !== Algorithm.getClassName) {
             return;
         }
         const { type, pageSize, page } = this.state;
         const total = this.props.total === 0 ? pageSize : this.props.total;
         const hasMoreData = page * pageSize < total ? true : false;
+        console.log(hasMoreData)
         this.isCan = false;
         if (hasMoreData) {
             const newPage = page + 1;
             const boolean = newPage === 1 ? false : true;
-            await this.props.onArticleList({ type, class: Home.getClassName, page: newPage }, boolean, boolean);
+            await this.props.onArticleList({ type, class: Algorithm.getClassName, page: newPage }, boolean, boolean);
             this.isCan = true;
             this.setState({ page: newPage, hasMoreData })
         } else {
@@ -70,9 +68,9 @@ class Home extends React.Component {
         const { type, hasMoreData } = this.state;
         const { articleList, loading, pathname } = this.props;
         return (
-            <Layout title="首页" path={pathname}>
+            <Layout title="算法" path={pathname}>
                 <Classify
-                    cates={CATES.index}
+                    cates={CATES.algorithm}
                     type={type}
                     onCates={this.handleCates}
                 />
@@ -88,25 +86,25 @@ class Home extends React.Component {
     }
 }
 
-Home.propTypes = {
+Algorithm.propTypes = {
     articleList: PropTypes.array,
     loading: PropTypes.bool,
     onArticleList: PropTypes.func
 }
 
 const mapStateToProps = state => ({
+    site: state.article.site,
     articleList: state.article.articleList,
     loading: state.article.loading,
-    site: state.article.site,
     total: state.article.total
 });
 
 const mapDispatchToProps = dispatch => ({
     onArticleList: (params, isLoading, isJoin) => dispatch(thunkArticleList(params, isLoading, isJoin))
 });
-const HomeConnect = connect(
+const AlgorithmConnect = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home);
+)(Algorithm);
 
-export default HomeConnect
+export default AlgorithmConnect

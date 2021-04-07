@@ -1,4 +1,5 @@
 import React from 'react';
+import bindAll from 'lodash.bindall';
 import Head from 'next/head'
 import Router from 'next/router'
 import Header from './header'
@@ -16,12 +17,8 @@ class Layout extends React.Component {
       expand: false,
       show: false
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleToggleExpand = this.handleToggleExpand.bind(this);
-    this.handleToggleSearch = this.handleToggleSearch.bind(this);
+    bindAll(this, ["handleChange", "handleSearch", "handleToggleExpand", "handleToggleSearch"]);
   }
-
   handleChange(event) {
     this.setState({ value: event.target.value });
   }

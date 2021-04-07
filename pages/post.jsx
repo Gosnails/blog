@@ -1,4 +1,5 @@
 import React from 'react';
+import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import Article from '../src/components/article';
 import Comment from '../src/components/comment';
@@ -41,10 +42,7 @@ class Post extends React.Component {
             comment: '',
             commentList: []
         }
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handleCommentChange = this.handleCommentChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        bindAll(this, ["handleNameChange", "handleEmailChange", "handleCommentChange", "handleSubmit"]);
     }
     componentDidMount() {
         this._getComment();
