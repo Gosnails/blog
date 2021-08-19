@@ -6,22 +6,17 @@ import List from '../src/components/list';
 import Classify from '../src/components/classify';
 import Layout from '../src/components/layout';
 import Loading from '../src/components/loading';
-import { CATES } from '../src/utils/config';
-import { thunkArticleList, setArticleSite } from '../src/reducers/article';
+import { getClassifyList } from '../src/api/classify';
+import { thunkArticleList } from '../src/reducers/article';
 import InfiniteScroll from 'react-infinite-scroller';
 
 class Home extends React.Component {
 
     static async getInitialProps({ reduxStore, ctx }) {
-        console.log(new Date().getTime())
-        const pathname = ctx.pathname
-        reduxStore.dispatch(setArticleSite(Home.getClassName));
-        await reduxStore.dispatch(thunkArticleList({class: Home.getClassName}));
-        return { pathname }
-    }
-
-    static get getClassName() {
-        return 'original';
+        const pathname = ctx.pathname;
+        const classifyData = await getClassifyList();
+        await reduxStore.dispatch(thunkArticleList());
+        return { classifyData, pathname }
     }
 
     constructor(props) {
@@ -47,7 +42,7 @@ class Home extends React.Component {
         }
     }
     async loadFunc() {
-        if (!this.isCan || this.props.site !== Home.getClassName) {
+        if (!this.isCan) {
             return;
         }
         const { type, pageSize, page } = this.state;
@@ -57,7 +52,7 @@ class Home extends React.Component {
         if (hasMoreData) {
             const newPage = page + 1;
             const boolean = newPage === 1 ? false : true;
-            await this.props.onArticleList({ type, class: Home.getClassName, page: newPage }, boolean, boolean);
+            await this.props.onArticleList({ type, page: newPage }, boolean, boolean);
             this.isCan = true;
             this.setState({ page: newPage, hasMoreData })
         } else {
@@ -68,11 +63,12 @@ class Home extends React.Component {
     }
     render() {
         const { type, hasMoreData } = this.state;
-        const { articleList, loading, pathname } = this.props;
+        const { articleList, loading, pathname, classifyData } = this.props;
+        console.log(classifyData)
         return (
             <Layout title="首页" path={pathname}>
                 <Classify
-                    cates={CATES.index}
+                    classifyData={classifyData}
                     type={type}
                     onCates={this.handleCates}
                 />
@@ -81,7 +77,7 @@ class Home extends React.Component {
                     hasMore={hasMoreData}
                     loader={<div className="loader" key={0}>Loading ...</div>}
                 >
-                    <List data={articleList} />
+                    <List data={articleList} classifyData={classifyData} />
                 </InfiniteScroll>)}
             </Layout>
         )
@@ -97,7 +93,6 @@ Home.propTypes = {
 const mapStateToProps = state => ({
     articleList: state.article.articleList,
     loading: state.article.loading,
-    site: state.article.site,
     total: state.article.total
 });
 

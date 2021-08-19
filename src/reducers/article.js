@@ -1,18 +1,15 @@
 
 import { getArticleList } from '../api/article';
 import { parseTime } from '../utils';
-import { CATES } from '../utils/config';
 
 const ARTICLE_LIST = 'blog/article/ARTICLE_LIST';
 const ARTICLE_LIST_JOIN = 'blog/article/ARTICLE_LIST_JOIN';
 const ARTICLE_LOADING = 'blog/article/ARTICLE_LOADING';
 const ARTICLE_TOTAL = 'blog/article/ARTICLE_TOTAL';
-const ARTICLE_SITE = 'blog/article/ARTICLE_SITE';
 
 const initArticleState = {
     articleList: [],
     loading: false,
-    site: "",
     total: 20
 };
 
@@ -23,7 +20,7 @@ const handleFormTime = time => {
 }
 
 const handleArticleList = data => {
-    const cates = [].concat.apply([], Object.values(CATES));
+    const cates = [].concat.apply([], Object.values([]));
     for (let i = 0; i < data.length; i++) {
         data[i].createdAt = handleFormTime(data[i].createdAt);
         for (let j = 0; j < cates.length; j++) {
@@ -50,10 +47,6 @@ const reducer = function (state, action) {
         case ARTICLE_LOADING:
             return Object.assign({}, state, {
                 loading: action.loading
-            });
-        case ARTICLE_SITE:
-            return Object.assign({}, state, {
-                site: action.site
             });
         case ARTICLE_TOTAL:
             return Object.assign({}, state, {
@@ -112,13 +105,6 @@ const setArticleLoading = function (bool) {
     };
 }
 
-const setArticleSite = function (site) {
-    return {
-        type: ARTICLE_SITE,
-        site: site
-    };
-}
-
 
 export {
     reducer as
@@ -126,6 +112,5 @@ export {
     initArticleState,
     setArticleList,
     thunkArticleList,
-    setArticleLoading,
-    setArticleSite
+    setArticleLoading
 };

@@ -6,14 +6,13 @@ import { connect } from 'react-redux'
 import List from '../src/components/list';
 import Layout from '../src/components/layout';
 import SearchTit from '../src/components/search-tit';
-import { thunkArticleList, setArticleSite } from '../src/reducers/article'
+import { thunkArticleList } from '../src/reducers/article'
 
 class Search extends React.Component {
 
     static async getInitialProps({ reduxStore, ctx }) {
         const pathname = ctx.pathname;
         const q = ctx.query.q;
-        reduxStore.dispatch(setArticleSite(''));
         await reduxStore.dispatch(thunkArticleList({ q }, true));
         return { q, pathname }
     }

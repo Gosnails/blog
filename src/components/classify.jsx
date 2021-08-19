@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const getCates = props => {
-    return props.cates.map(item => {
-        const isActive = props.type === item.value
+    return props.classifyData.map(item => {
+        const isActive = props.type === item._id
         return (
-            <li className={classNames('cateMenuItem', { ['active']: isActive })} key={item.label}
-                onClick={() => props.onCates(item.value)}>
-                {item.label}
+            <li className={classNames('cateMenuItem', { ['active']: isActive })} key={item.name}
+                onClick={() => props.onCates(item._id)}>
+                {item.name}
                 <style jsx>{`
                     .cateMenuItem {
                         display: inline-block;

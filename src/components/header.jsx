@@ -23,12 +23,6 @@ const Header = props => (
                             <li className="item">
                                 <Link href="/"><a className={classNames({ ['active']: props.path === '/' })}>首页</a></Link>
                             </li>
-                            <li className="item">
-                                <Link href="/read"><a className={classNames({ ['active']: props.path === '/read' })}>读书</a></Link>
-                            </li>
-                            <li className="item">
-                                <Link href="/algorithm"><a className={classNames({ ['active']: props.path === '/algorithm' })}>每日算法</a></Link>
-                            </li>
                         </ul>
                     </div>
                     <div className={classNames('search', { ['active']: props.show })}>
