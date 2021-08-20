@@ -7,14 +7,16 @@ import Classify from '../src/components/classify';
 import Layout from '../src/components/layout';
 import Loading from '../src/components/loading';
 import { getClassifyList } from '../src/api/classify';
-import { thunkArticleList } from '../src/reducers/article';
+import { thunkArticleList, setClassifyData } from '../src/reducers/article';
 import InfiniteScroll from 'react-infinite-scroller';
 
 class Home extends React.Component {
 
     static async getInitialProps({ reduxStore, ctx }) {
         const pathname = ctx.pathname;
-        const classifyData = await getClassifyList();
+        const data = await getClassifyList();
+        const classifyData = [{name: "全部", _id: ""}].concat(data.data);
+        await reduxStore.dispatch(setClassifyData(data.data));
         await reduxStore.dispatch(thunkArticleList());
         return { classifyData, pathname }
     }
@@ -64,7 +66,6 @@ class Home extends React.Component {
     render() {
         const { type, hasMoreData } = this.state;
         const { articleList, loading, pathname, classifyData } = this.props;
-        console.log(classifyData)
         return (
             <Layout title="首页" path={pathname}>
                 <Classify

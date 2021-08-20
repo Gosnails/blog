@@ -24,7 +24,7 @@ const getList = props => {
                     .card {
                             position: relative;
                             height: 0;
-                            padding-top: 60%;
+                            padding-top: 70%;
                             border-bottom-left-radius: 4px;
                             border-bottom-right-radius: 4px;
                             box-shadow: 0px 2px 10px 0px rgba(46,61,72,0.05);
@@ -45,7 +45,7 @@ const getList = props => {
                             bottom: 30px;
                             width: 100%;
                             height: 40px;
-                            line-height: 56px;
+                            line-height: 40px;
                             padding-left: 10px;
                             padding-right: 10px;
                             box-sizing: border-box;
@@ -61,7 +61,7 @@ const getList = props => {
                         
                         .foot {
                             position: absolute;
-                            bottom: 10px;
+                            bottom: 12px;
                             width: 100%;
                             height: 20px;
                             line-height: 20px;
@@ -69,6 +69,7 @@ const getList = props => {
                             padding-right: 10px;
                             font-size: 12px;
                             color: #555;
+                            box-sizing: border-box;
                         }
                         
                         .division {

@@ -3,12 +3,14 @@ import { getArticleList } from '../api/article';
 import { parseTime } from '../utils';
 
 const ARTICLE_LIST = 'blog/article/ARTICLE_LIST';
+const CLASSIFY_DATA = 'blog/article/CLASSIFY_DATA';
 const ARTICLE_LIST_JOIN = 'blog/article/ARTICLE_LIST_JOIN';
 const ARTICLE_LOADING = 'blog/article/ARTICLE_LOADING';
 const ARTICLE_TOTAL = 'blog/article/ARTICLE_TOTAL';
 
 const initArticleState = {
     articleList: [],
+    classifyData: [],
     loading: false,
     total: 20
 };
@@ -19,13 +21,13 @@ const handleFormTime = time => {
     return parseTime(timeStamp, '{y}-{m}-{d}');
 }
 
-const handleArticleList = data => {
-    const cates = [].concat.apply([], Object.values([]));
+const handleArticleList = (data, initArticleState) => {
+    const cates = [].concat.apply([], Object.values(initArticleState.classifyData));
     for (let i = 0; i < data.length; i++) {
         data[i].createdAt = handleFormTime(data[i].createdAt);
         for (let j = 0; j < cates.length; j++) {
-            if (cates[j].value && data[i].type === cates[j].value) {
-                data[i].type = cates[j].label;
+            if (cates[j]._id && data[i].type === cates[j]._id) {
+                data[i].type = cates[j].name;
                 break;
             }
         }
@@ -38,11 +40,11 @@ const reducer = function (state, action) {
     switch (action.type) {
         case ARTICLE_LIST:
             return Object.assign({}, state, {
-                articleList: handleArticleList(action.list)
+                articleList: handleArticleList(action.list, state)
             });
         case ARTICLE_LIST_JOIN:
             return Object.assign({}, state, {
-                articleList: state.articleList.concat(handleArticleList(action.list))
+                articleList: state.articleList.concat(handleArticleList(action.list, state))
             });
         case ARTICLE_LOADING:
             return Object.assign({}, state, {
@@ -51,6 +53,10 @@ const reducer = function (state, action) {
         case ARTICLE_TOTAL:
             return Object.assign({}, state, {
                 total: action.total
+            });
+        case CLASSIFY_DATA:
+            return Object.assign({}, state, {
+                classifyData: action.classifyData
             });
         default:
             return state;
@@ -105,6 +111,13 @@ const setArticleLoading = function (bool) {
     };
 }
 
+const setClassifyData = function (classifyData) {
+    return {
+        type: CLASSIFY_DATA,
+        classifyData: classifyData
+    };
+}
+
 
 export {
     reducer as
@@ -112,5 +125,6 @@ export {
     initArticleState,
     setArticleList,
     thunkArticleList,
-    setArticleLoading
+    setArticleLoading,
+    setClassifyData
 };
