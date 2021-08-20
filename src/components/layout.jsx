@@ -7,6 +7,7 @@ import BackTop from './back-top'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { thunkArticleList } from '../reducers/article'
+import { BASE_IMG_URL } from '../utils/config.js';
 import '../style/layout.css'
 
 class Layout extends React.Component {
@@ -54,6 +55,7 @@ class Layout extends React.Component {
         <Head>
           <title>{title}</title>
           <meta charSet='utf-8' />
+          <link rel="icon" href={BASE_IMG_URL + 'favicon.png'} />
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         </Head>
 
