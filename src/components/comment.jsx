@@ -143,6 +143,11 @@ const Comment = props => {
                     margin-bottom: 20px;
                     padding-bottom: 10px;
                 }
+                @media screen and (min-width: 1367px) {
+                    .grid {
+                        margin-left: 100px;
+                    }
+                }
             `}</style>
         </div>
     )

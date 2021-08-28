@@ -26,7 +26,7 @@ class Home extends React.Component {
         this.state = {
             type: '',
             page: 1,
-            pageSize: 12,
+            pageSize: 20,
             hasMoreData: true,
             total: props.total
         }

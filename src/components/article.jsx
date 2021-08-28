@@ -41,6 +41,11 @@ const Article = props => (
             margin-bottom: 50px;
             line-height: 1.75;
         }
+        @media screen and (min-width: 1367px) {
+            .grid {
+                margin-left: 100px;
+            }
+        }
     `}</style>
     </div>
 )

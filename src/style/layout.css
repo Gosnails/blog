@@ -21,6 +21,9 @@ a {
 img {
     width: 100%;
 }
+h1:target, h2:target, h3:target, h4:target, h5:target, h6:target {
+    padding-top: 60px;
+}
 .loader {
     text-align: center;
     margin-bottom: 20px;
@@ -92,8 +95,18 @@ img {
         width: 1024px;
     }
 
-    .el-col-sm-8 {
-        width: 33.33333%;
+    .el-col-md-6 {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 1367px) {
+    .content {
+        width: 1280px;
+    }
+
+    .el-col-md-6 {
+        width: 25%;
     }
 }
 

@@ -67,7 +67,7 @@ const thunkArticleList = function (params = {}, isLoading, isJoin) {
         if (!isLoading) {
             dispatch(setArticleLoading(true))
         }
-        return getArticleList(params).then(response => {
+        return getArticleList(Object.assign(params, {per_page: 20})).then(response => {
             const data = response.data
             const total = response.total
             if (!isLoading) {

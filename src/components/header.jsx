@@ -306,6 +306,11 @@ const Header = props => (
                     width: 1024px;
                 }
             }
+            @media screen and (min-width: 1367px) {
+                .grid {
+                    width: 1280px;
+                }
+            }
         `}</style>
     </div>
 )
