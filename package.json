@@ -12,7 +12,7 @@
     "koa": "^2.8.1",
     "koa-router": "^7.4.0",
     "lodash.bindall": "^4.4.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "next": "^9.0.5",
     "nprogress": "^0.2.0",
     "raf": "^3.4.1",
